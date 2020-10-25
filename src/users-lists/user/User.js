@@ -7,7 +7,9 @@ export class User extends React.Component {
             <h2>{ this.props.username }</h2>
             <strong>{ this.props.userhero }</strong>
             <ul>
-                <li>Super power</li>
+                {
+                    this.props.powers.map(power => <li>{ power }</li>)
+                }
             </ul>
         </div>
     }

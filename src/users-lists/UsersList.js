@@ -29,14 +29,38 @@ export class UsersList extends React.Component {
     getUsers() {
         return this.users.map(user => <User 
             username={ user.username } 
-            userhero={ user.userhero }></User>);
+            userhero={ user.userhero }
+            powers={ user.powers }></User>);
+    }
+
+    createHero(e) {
+        e.preventDefault();
+        alert("Create hero!" + this.heroName);
+    }
+
+    heroNameChange(e) {
+        this.heroName = e.target.value;
     }
 
     render() {
         return <div className="users-list">
             <h1>Users list</h1>
 
-            { this.getUsers() }
+            <div className="list">
+                <div>
+                    { this.getUsers() }
+                </div>
+
+                <form onSubmit={(e) => this.createHero(e)}>
+                    <fieldset>
+                        <legend>Create Hero</legend>
+                        <input onChange={(e) => this.heroNameChange(e) } placeholder="Hero name"></input>
+                        <button>Create!</button>
+                    </fieldset>
+                </form>
+            </div>
+
+        
         </div>;
     }
 }
