@@ -6,10 +6,6 @@ export class User extends React.Component {
 
     constructor() {
         super();
-
-        this.state = {
-            detailsClassName: 'hidden'
-        }
     }
 
     sayHello() {
