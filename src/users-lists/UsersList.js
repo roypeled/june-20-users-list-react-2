@@ -40,7 +40,8 @@ export class UsersList extends React.Component {
                         this.state.users.map(user => <User 
                             name={ user.name } 
                             email={ user.email }
-                            address={ user.address }></User>)
+                            address={ user.address }
+                            companyName={ user.company.name }></User>)
                     }
                 </div>
             </div>

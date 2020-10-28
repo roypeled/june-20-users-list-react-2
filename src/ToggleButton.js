@@ -29,7 +29,7 @@ export class ToggleButton extends React.Component {
                 <legend>
                     { this.renderButton() }
                 </legend>
-                <div className={ this.state.isHidden ? 'hidden' : 'shown' }>
+                <div className={ (this.state.isHidden ? 'hidden' : 'shown') + ' toggle-btn' }>
                     { this.props.children }
                 </div>
             </fieldset>
