@@ -7,60 +7,43 @@ export class UsersList extends React.Component {
     constructor() {
         super();
 
-        this.users = [
-            {
-                username: "Peter Parker",
-                userhero: "Spiderman",
-                powers: ["walk on walls", "swing web", "spider sense"]
-            },
-            {
-                username: "Bruce Wayne",
-                userhero: "Batman",
-                powers: ["super rich", "super detective"]
-            },
-            {
-                username: "Tony Stark",
-                userhero: "Ironman",
-                powers: ["Fly", "super intelliigence", "shoot missiles"]
-            }
-        ];
+        this.state = {
+            users: [],
+        };
+
+        this.init();
     }
 
-    getUsers() {
-        return this.users.map(user => <User 
-            username={ user.username } 
-            userhero={ user.userhero }
-            powers={ user.powers }></User>);
+    async init() {
+        const users = await this.fetchUsers();
+        this.setState({ users: users });
+
+        setTimeout(() => this.init(), 5000);
     }
 
-    createHero(e) {
-        e.preventDefault();
-        alert("Create hero!" + this.heroName);
-    }
-
-    heroNameChange(e) {
-        this.heroName = e.target.value;
+    async fetchUsers() {
+        const result = await fetch('https://jsonplaceholder.typicode.com/users/');
+        return result.json();
     }
 
     render() {
+        if (this.state.users.length <= 0) {
+            return <div>Loading Users...</div>
+        }
+
         return <div className="users-list">
             <h1>Users list</h1>
 
             <div className="list">
                 <div>
-                    { this.getUsers() }
+                    { 
+                        this.state.users.map(user => <User 
+                            name={ user.name } 
+                            email={ user.email }
+                            address={ user.address }></User>)
+                    }
                 </div>
-
-                <form onSubmit={(e) => this.createHero(e)}>
-                    <fieldset>
-                        <legend>Create Hero</legend>
-                        <input onChange={(e) => this.heroNameChange(e) } placeholder="Hero name"></input>
-                        <button>Create!</button>
-                    </fieldset>
-                </form>
             </div>
-
-        
         </div>;
     }
 }
