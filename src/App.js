@@ -36,17 +36,14 @@ export function App(props) {
         </div>
 
         <Switch>
+          <Route path="/users/:userId/posts">
+            <Post></Post>
+          </Route>
           <Route path="/users">
             <UsersList></UsersList>
           </Route>
           <Route path="/about">
             <About></About>
-          </Route>
-          <Route path="/post/:userId">
-            <Post></Post>
-          </Route>
-          <Route path="/user/">
-            details for user 12
           </Route>
           <Route path="/">
             <h1>Welcome to my website</h1>
