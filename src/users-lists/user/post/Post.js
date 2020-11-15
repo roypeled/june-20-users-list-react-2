@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { AppContext } from "../../../AppContext";
 import { Comments } from "../../comments/Comments";
+import { useParams } from "react-router-dom";
 
 async function fetchPosts(userId) {
     const result = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
@@ -12,16 +13,17 @@ export function Post() {
 
     const [posts, setPost] = useState(null);
     const context = useContext(AppContext);
+    const params = useParams();
 
     useEffect(() => {
         const get = async () => {
-            setPost(await fetchPosts(context.selectedUser));
+            setPost(await fetchPosts(params.userId));
         }
 
         get();
-    }, [context.selectedUser]);
+    }, [params.userId]);
 
-    if(!posts || !context.selectedUser) return <div>Loading post...</div>;
+    if(!posts || !params.userId) return <div>Loading post...</div>;
 
     return <div className="user-post">
         { 
